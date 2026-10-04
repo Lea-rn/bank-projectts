@@ -1,0 +1,342 @@
+@import url("https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&family=Monoton&family=Mozilla+Headline:wght@200..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Press+Start+2P&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: rgb(241, 235, 235);
+  font-family: "Open Sans", sans-serif;
+}
+
+/* //////////// header ///////////////////// */
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  position: relative;
+}
+.auth-header {
+  text-align: end;
+}
+.auth-header input {
+  text-align: center;
+  width: 20%;
+  border: transparent;
+  padding: 8px;
+  border-radius: 15px;
+  margin-right: 5px;
+}
+
+header span {
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+header img {
+  position: absolute;
+  left: 680px;
+}
+
+/* ////////////// main header ////////////// */
+
+.main-header {
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 70px auto;
+}
+
+/* //////////// movements /////////// */
+.movements-container {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+.right {
+  width: 48%;
+  margin-left: 20px;
+  height: 600px;
+}
+
+.left {
+  width: 48%;
+  margin-right: 20px;
+  height: 600px;
+  overflow: scroll;
+  background-color: white;
+}
+
+/* ////////// left - side //////// */
+
+.deposit-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 15px;
+  border-bottom: 1px solid gray;
+}
+.deposit-info span {
+  font-size: 13px;
+}
+.deposit {
+  border-radius: 10px;
+  background: linear-gradient(to bottom right, #7ed481, #3ea343);
+  color: white;
+  padding: 2px;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.withdraw-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 15px;
+  border-bottom: 1px solid gray;
+}
+
+.withdraw-info span {
+  font-size: 13px;
+}
+
+.withdraw {
+  border-radius: 10px;
+  background: linear-gradient(to bottom right, #e35858, #ba3f3f);
+  color: white;
+  padding: 2px;
+  font-weight: 500;
+  margin-right: 10px;
+}
+/* 
+/////////// right side //////// */
+
+/* //////////// transfert ///////////////// */
+
+.transfert-box {
+  border-radius: 10px;
+  position: relative;
+  height: 180px;
+  background: linear-gradient(to right bottom, #ffc107, #ff9800);
+  margin-bottom: 30px;
+}
+
+.transfert-box h3 {
+  position: absolute;
+  left: 40px;
+  top: 15px;
+}
+
+.transfert-input {
+  position: absolute;
+  left: 40px;
+  top: 80px;
+  padding: 8px 0px;
+  width: 30%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.388);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.transfert-to {
+  position: absolute;
+  left: 75px;
+  top: 120px;
+}
+
+.amount-transfert-box-input {
+  position: absolute;
+  top: 80px;
+  right: 100px;
+  padding: 8px 0px;
+  width: 30%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.388);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.amount-transfert-label {
+  position: absolute;
+  top: 120px;
+  right: 140px;
+}
+
+.btn-transfert-box {
+  position: absolute;
+  top: 80px;
+  right: 30px;
+  padding: 8px 23px;
+  border: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* /////////// loan ////////// */
+
+.loan-box {
+  border-radius: 10px;
+  position: relative;
+  height: 180px;
+  background: linear-gradient(to right bottom, #59c45d, #48964c);
+  margin-bottom: 30px;
+}
+
+.loan-box h3 {
+  position: absolute;
+  left: 40px;
+  top: 15px;
+}
+
+.amount-loan-box-input {
+  position: absolute;
+  left: 40px;
+  top: 80px;
+  padding: 8px 0px;
+  width: 30%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.388);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.amount-loan-label {
+  position: absolute;
+  left: 86px;
+  top: 120px;
+}
+
+.btn-loan-box {
+  position: absolute;
+  top: 80px;
+  left: 210px;
+  padding: 8px 23px;
+  border: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* //////////////// close box //////////// */
+
+.close-box {
+  border-radius: 10px;
+  position: relative;
+  height: 180px;
+  background: linear-gradient(to right bottom, #e35858, #ba3f3f);
+}
+
+.close-box h3 {
+  position: absolute;
+  left: 40px;
+  top: 15px;
+}
+.close-input {
+  position: absolute;
+  left: 40px;
+  top: 80px;
+  padding: 8px 0px;
+  width: 30%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.388);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.confirm-label {
+  position: absolute;
+  left: 70px;
+  top: 120px;
+}
+
+.pin-input {
+  position: absolute;
+  top: 80px;
+  right: 100px;
+  padding: 8px 0px;
+  width: 30%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.388);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.pin-label {
+  position: absolute;
+  top: 120px;
+  right: 130px;
+}
+
+.btn-close-box {
+  position: absolute;
+  top: 80px;
+  right: 30px;
+  padding: 8px 23px;
+  border: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* /////////////////// footer ////////////// */
+
+footer {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.in {
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.average-in {
+  font-size: 20px;
+  color: #7ed481;
+}
+
+.out {
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.average-out {
+  font-size: 20px;
+  color: #ba3f3f;
+}
+.interest {
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.average-interest {
+  font-size: 20px;
+  color: #7ed481;
+}
+
+.logout-timer {
+  font-weight: 800;
+}
+/* main {
+transition: 1s;
+} */
+/* main {
+  opacity: 0;
+} */
