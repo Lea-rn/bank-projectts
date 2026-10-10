@@ -35,8 +35,10 @@ const accounts = [account1, account2, account3, account4];
 
 const movementsContainer = document.querySelector(".left");
 
-///// display movements  :::
+const balanceAccount = document.querySelector(".balance");
 
+///// display movements  :::
+//  [430, 1000, 700, 50, 90],
 const displayMovements = function (arr) {
   movementsContainer.innerHTML = "";
 
@@ -61,7 +63,17 @@ const displayMovements = function (arr) {
 
 displayMovements(account4.movements);
 
-//////// lecture ::::
+////// display blance :::
+
+const displayBalance = function (arr) {
+  const balance = arr.reduce((acc, ele) => acc + ele, 0);
+  ///// update ui ::
+  balanceAccount.textContent = balance;
+};
+
+displayBalance(account4.movements);
+
+/////////////////////////////// lecture///////////////////////////////////////////// ::::
 
 ///
 // const numbers = [3, 1, 4, 3, 2];
@@ -83,12 +95,83 @@ displayMovements(account4.movements);
 
 //////  higher order function == > method array + parameter had callback function (anonymos function) ,
 
-const euro = [100, 50, 10, 25];
+// const euro = [100, 50, 10, 25];
 
-console.log("euro :", euro);
+// console.log("euro :", euro);
 
-const toTunisanDinar = 3.35;
+// const toTunisanDinar = 3.35;
 
-const dinar = euro.map((ele) => ele * toTunisanDinar);
+// const dinar = euro.map((ele) => ele * toTunisanDinar);
 
-console.log("dinar", dinar);
+// console.log("dinar", dinar);
+
+///// filter  ::
+
+// const x = [3, 1, 4, 3, 2];
+// console.log(x);
+
+// const numbresGreaterThanTwo = x.filter((ele) => ele > 2);
+
+// console.log(numbresGreaterThanTwo);
+
+///// for loop ::
+// const x = [3, 1, 4, 3, 2];
+// console.log(x);
+
+// const numbresGreaterThanTwo = [];
+
+// for (let i = 0; i < x.length; i++) {
+//   if (x[i] > 2) {
+//     numbresGreaterThanTwo.push(x[i]);
+//   }
+// }
+
+// console.log(numbresGreaterThanTwo);
+
+/////// reduce :::
+
+// const x = [3, 1, 4, 3, 2];
+
+// const sum = x.reduce((acc, num, i) => acc + num, 0);
+
+///// 0 + 3 = 3 ; 3 + 1 = 4 ; 4 + 4 = 8 ; 8 + 3 = 11 ; 11 + 2 = 13
+// console.log(sum);
+
+// const multiple = x.reduce((acc, num) => acc * num, 1);
+
+// console.log(multiple);
+
+// const x = [2, 30, 1, 4, 50, 2];
+
+///// get max using reduce :
+
+// const max = x.reduce((acc, ele) => {
+//   if (acc > ele) {
+//     return acc;
+//   } else return ele;
+// }, x[0]);
+
+// console.log(max);
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// console.log(movements);
+// const euroToDinar = 3.3;
+
+//// sum of deposit on tunisian dinar ..
+
+// const positiveMovements = movements.filter((ele) => ele > 0);
+// console.log(positiveMovements);
+// const toDinar = positiveMovements.map((ele) => ele * euroToDinar);
+// console.log(toDinar);
+
+// const sum = toDinar.reduce((acc, ele) => acc + ele, 0);
+
+// console.log(sum);
+
+////// chaining , pipeline  :::
+
+// const sum = movements
+//   .filter((ele) => ele > 0)
+//   .map((ele) => ele * euroToDinar)
+//   .reduce((acc, ele) => acc + ele, 0);
+// console.log(sum);
