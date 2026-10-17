@@ -1,3 +1,7 @@
+///mardi ==> 17h:30
+//// jeudi ==> 19h
+//// dimanche ==> 19h:30
+
 "use strict";
 
 ///// dummy data ::
@@ -7,6 +11,8 @@ const account1 = {
   interestRate: 1.2,
   pin: 1111,
 };
+
+////
 
 const account2 = {
   owner: "Jessica Davis",
@@ -37,8 +43,56 @@ const movementsContainer = document.querySelector(".left");
 
 const balanceAccount = document.querySelector(".balance");
 
+const inComes = document.querySelector(".average-in");
+const outMoney = document.querySelector(".average-out");
+const interest = document.querySelector(".average-interest");
+
+///// display summary functionnality ::
+//// [200, -200, 340, -300, -20, 50, 400, -460, 100, -400],
+const calcDisplaySummary = function (accountMovement, account) {
+  const inc = accountMovement
+    .filter((ele) => ele > 0)
+    .reduce((acc, num) => acc + num, 0);
+  //// u.u.i :
+  inComes.textContent = inc;
+  const outc = accountMovement
+    .filter((ele) => ele < 0)
+    .reduce((acc, ele) => ele + acc, 0);
+
+  /// u.u.i :
+  outMoney.textContent = Math.abs(outc);
+
+  ////filter > 0 ; map*rate/100 ; filter > 1 ; reduce+;
+  // const int = accountMovement.filter((mov) => mov > 0);
+  // console.log(int);
+  // const int1 = int.map((deposit) => (deposit * account) / 100);
+  // console.log(int1);
+  // const int2 = int1.filter((ele) => ele > 1);
+  // console.log(int2);
+  // const int3 = int2.reduce((acc, ele) => ele + acc, 0);
+  // console.log(int3);
+
+  const int = accountMovement
+    .filter((mov) => mov > 0)
+    .map((deposit, i, arr) => {
+      console.log(arr);
+      return (deposit * account) / 100;
+    })
+    .filter((ele, x, y) => {
+      console.log(y);
+      return ele > 1;
+    })
+    .reduce((acc, ele) => acc + ele, 0);
+  console.log(int);
+
+  ///// u.u.i :
+  interest.textContent = int;
+};
+
+calcDisplaySummary(account3.movements, account3.interestRate);
+
 ///// display movements  :::
-//  [430, 1000, 700, 50, 90],
+
 const displayMovements = function (arr) {
   movementsContainer.innerHTML = "";
 
@@ -61,7 +115,7 @@ const displayMovements = function (arr) {
   });
 };
 
-displayMovements(account4.movements);
+displayMovements(account3.movements);
 
 ////// display blance :::
 
@@ -71,7 +125,7 @@ const displayBalance = function (arr) {
   balanceAccount.textContent = balance;
 };
 
-displayBalance(account4.movements);
+displayBalance(account3.movements);
 
 /////////////////////////////// lecture///////////////////////////////////////////// ::::
 
@@ -175,3 +229,24 @@ displayBalance(account4.movements);
 //   .map((ele) => ele * euroToDinar)
 //   .reduce((acc, ele) => acc + ele, 0);
 // console.log(sum);
+
+////// split (string ==> array)
+///// join (array ==> string)
+
+// const user = "Park Thomas Williams"; /// ptw
+
+// const result = user
+//   .toLowerCase()
+//   .split(" ")
+//   .map((ele) => ele[0])
+//   .join("");
+// console.log(result);
+
+// const userName = user.toLowerCase();
+// console.log(userName); //// park thomas williams
+// const userName1 = userName.split(" ");
+// console.log(userName1); /// ["park","thomas","williams"]
+// const userName2 = userName1.map((nom) => nom[0]);
+// console.log(userName2); //// ["p","t","w"]
+// const result = userName2.join("");
+// console.log(result); //// ptw

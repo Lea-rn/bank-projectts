@@ -305,7 +305,9 @@ footer {
   margin-right: 10px;
 }
 
-.average-in {
+.average-in,
+.euro-in,
+.euro-interest {
   font-size: 20px;
   color: #7ed481;
 }
@@ -316,7 +318,8 @@ footer {
   margin-right: 10px;
 }
 
-.average-out {
+.average-out,
+.euro-out {
   font-size: 20px;
   color: #ba3f3f;
 }
