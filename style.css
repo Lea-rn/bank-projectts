@@ -39,6 +39,10 @@ header img {
   left: 680px;
 }
 
+.btn-login {
+  cursor: pointer;
+}
+
 /* ////////////// main header ////////////// */
 
 .main-header {

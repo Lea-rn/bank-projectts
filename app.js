@@ -47,56 +47,67 @@ const inComes = document.querySelector(".average-in");
 const outMoney = document.querySelector(".average-out");
 const interest = document.querySelector(".average-interest");
 
+const userNameInput = document.querySelector(".user");
+const pinInput = document.querySelector(".pin");
+const btnLogin = document.querySelector(".btn-login");
+const welcomeMessage = document.querySelector(".welcome");
+const app = document.querySelector("main");
+
+///////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+const displayUserName = function (arr) {
+  arr.forEach((person) => {
+    person.userName = person.owner
+      .toLowerCase()
+      .split(" ")
+      .map((ele) => ele[0])
+      .join("");
+  });
+};
+
+displayUserName(accounts);
+
 ///// display summary functionnality ::
-//// [200, -200, 340, -300, -20, 50, 400, -460, 100, -400],
-const calcDisplaySummary = function (accountMovement, account) {
-  const inc = accountMovement
+
+const calcDisplaySummary = function (cur) {
+  const inc = cur.movements
     .filter((ele) => ele > 0)
     .reduce((acc, num) => acc + num, 0);
   //// u.u.i :
   inComes.textContent = inc;
-  const outc = accountMovement
+  const outc = cur.movements
     .filter((ele) => ele < 0)
     .reduce((acc, ele) => ele + acc, 0);
 
   /// u.u.i :
   outMoney.textContent = Math.abs(outc);
 
-  ////filter > 0 ; map*rate/100 ; filter > 1 ; reduce+;
-  // const int = accountMovement.filter((mov) => mov > 0);
-  // console.log(int);
-  // const int1 = int.map((deposit) => (deposit * account) / 100);
-  // console.log(int1);
-  // const int2 = int1.filter((ele) => ele > 1);
-  // console.log(int2);
-  // const int3 = int2.reduce((acc, ele) => ele + acc, 0);
-  // console.log(int3);
-
-  const int = accountMovement
+  const int = cur.movements
     .filter((mov) => mov > 0)
     .map((deposit, i, arr) => {
-      console.log(arr);
-      return (deposit * account) / 100;
+      // console.log(arr);
+      return (deposit * cur.interestRate) / 100;
     })
     .filter((ele, x, y) => {
-      console.log(y);
+      // console.log(y);
       return ele > 1;
     })
     .reduce((acc, ele) => acc + ele, 0);
-  console.log(int);
+  // console.log(int);
 
   ///// u.u.i :
   interest.textContent = int;
 };
 
-calcDisplaySummary(account3.movements, account3.interestRate);
+// calcDisplaySummary(account3.movements, account3.interestRate);
 
 ///// display movements  :::
 
-const displayMovements = function (arr) {
+const displayMovements = function (cur) {
   movementsContainer.innerHTML = "";
 
-  arr.forEach(function (mov, i) {
+  cur.movements.forEach(function (mov, i) {
     let type = mov > 0 ? "deposit" : "withdraw";
 
     let html = `
@@ -115,17 +126,41 @@ const displayMovements = function (arr) {
   });
 };
 
-displayMovements(account3.movements);
+// displayMovements(account3.movements);
 
 ////// display blance :::
 
-const displayBalance = function (arr) {
-  const balance = arr.reduce((acc, ele) => acc + ele, 0);
+const displayBalance = function (cur) {
+  const balance = cur.movements.reduce((acc, ele) => acc + ele, 0);
   ///// update ui ::
   balanceAccount.textContent = balance;
 };
 
-displayBalance(account3.movements);
+// displayBalance(account3.movements);
+
+////////// authentication functionnality
+let currentAccount;
+btnLogin.addEventListener("click", function (e) {
+  e.preventDefault(); ////// delete par default (auto reload)
+  currentAccount = accounts.find((acc) => acc.userName === userNameInput.value);
+  console.log("current :", currentAccount);
+  if (currentAccount.pin === Number(pinInput.value)) {
+    welcomeMessage.textContent = `welcome back ${currentAccount.owner.split(" ")[0]}`;
+    app.style.opacity = 1;
+    displayMovements(currentAccount);
+    calcDisplaySummary(currentAccount);
+    displayBalance(currentAccount);
+    userNameInput.value = "";
+    pinInput.value = "";
+  } else {
+    alert("wrong email or password !!!");
+  }
+});
+
+/////// transfert  functionality :::
+//// conditions :::
+//// balance >= amount && receiver should be true && amount > 0 && amount should be true
+///// && current account should be defrent of reciever
 
 /////////////////////////////// lecture///////////////////////////////////////////// ::::
 
@@ -250,3 +285,37 @@ displayBalance(account3.movements);
 // console.log(userName2); //// ["p","t","w"]
 // const result = userName2.join("");
 // console.log(result); //// ptw
+
+//////// find :::
+
+// const numbers = [10, 20, 26, 30, 40, 20];
+
+// const result = numbers.find((ele) => ele > 10);
+
+// console.log(result);
+
+// if (result) {
+//   console.log("alert ");
+// }
+
+// const dataBase = [
+//   {
+//     userName: "peter",
+//     photo: "picture1",
+//     coins: 100,
+//   },
+
+//   {
+//     userName: "mark",
+//     photo: "picture2",
+//     coins: 200,
+//   },
+//   {
+//     userName: "nicole",
+//     photo: "picture3",
+//     coins: 300,
+//   },
+// ];
+
+// const winner = dataBase.find((person) => person.coins === 200);
+// console.log(winner);
