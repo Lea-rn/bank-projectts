@@ -52,7 +52,9 @@ const pinInput = document.querySelector(".pin");
 const btnLogin = document.querySelector(".btn-login");
 const welcomeMessage = document.querySelector(".welcome");
 const app = document.querySelector("main");
-
+const transfertUser = document.querySelector(".transfert-input");
+const amoutToTransfert = document.querySelector(".amount-transfert-box-input");
+const transfertButton = document.querySelector(".btn-transfert-box");
 ///////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
@@ -134,7 +136,14 @@ const displayBalance = function (cur) {
   const balance = cur.movements.reduce((acc, ele) => acc + ele, 0);
   ///// update ui ::
   balanceAccount.textContent = balance;
+  cur.credit = balance;
 };
+
+function updateUi(current) {
+  displayMovements(current);
+  displayBalance(current);
+  calcDisplaySummary(current);
+}
 
 // displayBalance(account3.movements);
 
@@ -147,9 +156,8 @@ btnLogin.addEventListener("click", function (e) {
   if (currentAccount.pin === Number(pinInput.value)) {
     welcomeMessage.textContent = `welcome back ${currentAccount.owner.split(" ")[0]}`;
     app.style.opacity = 1;
-    displayMovements(currentAccount);
-    calcDisplaySummary(currentAccount);
-    displayBalance(currentAccount);
+    //// u.u.i
+    updateUi(currentAccount);
     userNameInput.value = "";
     pinInput.value = "";
   } else {
@@ -159,8 +167,29 @@ btnLogin.addEventListener("click", function (e) {
 
 /////// transfert  functionality :::
 //// conditions :::
-//// balance >= amount && receiver should be true && amount > 0 && amount should be true
+//// balance >= amount && receiver should be true && amount > 0
 ///// && current account should be defrent of reciever
+
+transfertButton.addEventListener("click", function (e) {
+  e.preventDefault();
+  const amount = Number(amoutToTransfert.value);
+  const balance = currentAccount.credit;
+  const reciever = accounts.find((acc) => acc.userName === transfertUser.value);
+
+  if (
+    balance >= amount &&
+    reciever &&
+    amount > 0 &&
+    currentAccount.userName !== reciever.userName
+  ) {
+    currentAccount.movements.push(-amount);
+    reciever.movements.push(amount);
+    ///// u.u.i
+    updateUi(currentAccount);
+    ////
+    transfertUser.value = amoutToTransfert.value = "";
+  }
+});
 
 /////////////////////////////// lecture///////////////////////////////////////////// ::::
 
@@ -319,3 +348,73 @@ btnLogin.addEventListener("click", function (e) {
 
 // const winner = dataBase.find((person) => person.coins === 200);
 // console.log(winner);
+
+/////// indexOf() ;
+// const arr = [1, 22, 4];
+
+// const result = arr.indexOf(222);
+// console.log(result);
+
+// function findNumber(num, arr) {
+//   if (arr.indexOf(num) === -1) {
+//     console.log(`${num} is not found !!!`);
+//   } else {
+//     console.log(`${num} is a grate number`);
+//   }
+// }
+// findNumber(92, arr);
+
+//// findIndex () ::
+
+// const index = arr.findIndex((ele) => ele === 1);
+// console.log(index);
+
+///// includes () :::
+// const numbers = [20, 22, 50, 100, 150];
+// console.log(numbers.includes(110));
+
+////// some ::
+
+// const numbers = [20, 22, 50, 100, 150];
+
+// const result = numbers.some((ele) => ele > 150); ////
+// console.log(result);
+
+// const customers = [
+//   {
+//     name: "asma",
+//     hours: 160,
+//   },
+
+//   {
+//     name: "youssef",
+//     hours: 100,
+//   },
+
+//   {
+//     name: "zina",
+//     hours: 120,
+//   },
+
+//   {
+//     name: "mohamed",
+//     hours: 200,
+//   },
+//   {
+//     name: "awatef",
+//     hours: 150,
+//   },
+// ];
+
+// const test = customers.some((ele) => ele.hours < 150);
+
+// if (test) {
+//   alert("fama chkoun may7ebech yekhdem");
+// }
+
+//////// every ::
+
+const numbers = [20, 22, 50, 100, 150];
+
+const result = numbers.every((ele) => ele > 50);
+console.log(result);
