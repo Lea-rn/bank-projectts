@@ -55,6 +55,13 @@ const app = document.querySelector("main");
 const transfertUser = document.querySelector(".transfert-input");
 const amoutToTransfert = document.querySelector(".amount-transfert-box-input");
 const transfertButton = document.querySelector(".btn-transfert-box");
+const loanInput = document.querySelector(".amount-loan-box-input");
+const loanBtn = document.querySelector(".btn-loan-box");
+const closeUser = document.querySelector(".close-input");
+const pinToClose = document.querySelector(".pin-input");
+const btnClose = document.querySelector(".btn-close-box");
+const btnSort = document.querySelector(".sort");
+
 ///////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
@@ -106,10 +113,14 @@ const calcDisplaySummary = function (cur) {
 
 ///// display movements  :::
 
-const displayMovements = function (cur) {
+const displayMovements = function (cur, sort = false) {
   movementsContainer.innerHTML = "";
 
-  cur.movements.forEach(function (mov, i) {
+  const movs = sort
+    ? cur.movements.slice().sort((a, b) => a - b)
+    : cur.movements;
+
+  movs.forEach(function (mov, i) {
     let type = mov > 0 ? "deposit" : "withdraw";
 
     let html = `
@@ -128,7 +139,12 @@ const displayMovements = function (cur) {
   });
 };
 
-// displayMovements(account3.movements);
+///// sort functionnality ::
+let sorted = false;
+btnSort.addEventListener("click", function () {
+  displayMovements(currentAccount, !sorted);
+  sorted = !sorted;
+});
 
 ////// display blance :::
 
@@ -188,6 +204,41 @@ transfertButton.addEventListener("click", function (e) {
     updateUi(currentAccount);
     ////
     transfertUser.value = amoutToTransfert.value = "";
+  }
+});
+
+////// loan functionnality ::
+///// amount > 0 && mov / 10 > amount
+loanBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  const amount = Number(loanInput.value);
+  if (amount > 0 && currentAccount.movements.some((mov) => mov / 10 > amount)) {
+    currentAccount.movements.push(amount);
+    //// u.u.i
+    updateUi(currentAccount);
+    loanInput.value = "";
+  } else {
+    alert("please try again with another loan value ..");
+    loanInput.value = "";
+  }
+});
+
+/////// close functionnality ::
+
+btnClose.addEventListener("click", function (e) {
+  e.preventDefault();
+  const accountToClose = closeUser.value;
+  const accountPinToClose = Number(pinToClose.value);
+  if (
+    currentAccount.userName === accountToClose &&
+    currentAccount.pin === accountPinToClose
+  ) {
+    const index = accounts.findIndex((acc) => acc.userName === accountToClose);
+    accounts.splice(index, 1);
+    app.style.opacity = 0;
+    welcomeMessage.textContent = "Log in to get started";
+  } else {
+    alert("wrong email or password !! ");
   }
 });
 
@@ -377,7 +428,7 @@ transfertButton.addEventListener("click", function (e) {
 
 // const numbers = [20, 22, 50, 100, 150];
 
-// const result = numbers.some((ele) => ele > 150); ////
+// const result = numbers.some((ele) => ele > 50); ////
 // console.log(result);
 
 // const customers = [
@@ -414,7 +465,13 @@ transfertButton.addEventListener("click", function (e) {
 
 //////// every ::
 
-const numbers = [20, 22, 50, 100, 150];
+// const numbers = [20, 22, 50, 100, 150];
 
-const result = numbers.every((ele) => ele > 50);
-console.log(result);
+// const result = numbers.every((ele) => ele > 50);
+// console.log(result);
+
+// function welcome(name, x = "hello") {
+//   const message = `${x} ${name}`;
+//   return message;
+// }
+// console.log(welcome("asma"));

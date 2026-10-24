@@ -344,6 +344,10 @@ footer {
 /* main {
 transition: 1s;
 } */
-/* main {
+main {
   opacity: 0;
-} */
+}
+
+.sort {
+  cursor: pointer;
+}
